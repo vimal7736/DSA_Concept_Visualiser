@@ -88,7 +88,7 @@ const Home = () => {
         </p>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {projectLinks.map((project, index) => (
+          {projectLinks.map((project) => (
             <motion.a
               key={project.href}
               href={project.href}

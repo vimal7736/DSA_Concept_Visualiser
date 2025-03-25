@@ -92,7 +92,7 @@ const RainWaterTrapped = () => {
                     />
                 </div>
 
-                <div className="flex justify-center space-x-2 mb-6 border-b-2 border-neutral-800 bg-neutral-100 p-4 rounded-lg" style={{ height: `${maxHeight * 30 + 20}px` }}>
+                <div className="flex justify-center space-x-2 mb-6 border-b-2 border-neutral-800  p-4 rounded-lg" style={{ height: `${maxHeight * 30 + 20}px` }}>
                     {bars}
                 </div>
 

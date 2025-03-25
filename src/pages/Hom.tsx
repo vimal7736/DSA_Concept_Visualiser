@@ -1,6 +1,22 @@
 import { motion } from 'framer-motion';
+import { 
+  BeakerIcon, 
+  ChartBarIcon, 
+  CodeBracketIcon 
+} from '@heroicons/react/24/solid';
 
 const Home = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1, 
+      transition: { 
+        staggerChildren: 0.2,
+        delayChildren: 0.2 
+      } 
+    }
+  };
+
   const titleVariants = {
     hidden: { opacity: 0, y: -50 },
     visible: { 
@@ -9,53 +25,91 @@ const Home = () => {
       transition: { 
         type: 'spring', 
         stiffness: 100, 
-        damping: 10,
-        delay: 0.2 
+        damping: 10
       } 
     },
   };
 
-  const linkVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
+  const cardVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
     visible: { 
       opacity: 1, 
       scale: 1, 
       transition: { 
-        duration: 0.5, 
-        ease: 'easeOut', 
-        delay: 0.4 
+        type: 'spring',
+        stiffness: 200,
+        damping: 10
       } 
     },
     hover: { 
-      scale: 1.05, 
+      scale: 1.05,
       transition: { duration: 0.2 } 
-    },
+    }
   };
 
+  const projectLinks = [
+    {
+      href: "/rain-water",
+      icon: BeakerIcon,
+      title: "Rain Water Trapper",
+      description: "Visualize water trapping algorithm"
+    },
+    {
+    //   href: "/graph-algo",
+      icon: ChartBarIcon,
+      title: "Graph Algorithms",
+      description: "Explore path finding & traversal"
+    },
+    {
+    //   href: "/code-challenges",
+      icon: CodeBracketIcon,
+      title: "Coding Challenges",
+      description: "Practice DSA problems"
+    }
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 flex items-center justify-center p-6">
-      <div className="bg-white rounded-xl shadow-lg p-8 max-w-md w-full text-center">
+    <motion.div 
+      className="min-h-screen bg-gradient-to-br from-green-500 via-purple-500 to-pink-900 flex items-center justify-center p-6 font-['Manrope']"
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
+      <div className="bg-white rounded-2xl shadow-2xl p-10 max-w-2xl w-full">
         <motion.h1
-          className="text-4xl font-extrabold text-gray-800 mb-6"
+          className="text-5xl font-black text-center bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-8"
           variants={titleVariants}
-          initial="hidden"
-          animate="visible"
         >
-          Welcome to DSA Visualizer
+          DSA Visualizer
         </motion.h1>
 
-        <motion.a
-          href="/rain-water"
-          className="inline-block bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          variants={linkVariants}
-          initial="hidden"
-          animate="visible"
-          whileHover="hover"
-        >
-          Explore Rain Water Problem
-        </motion.a>
+        <p className="text-center text-neutral-600 mb-10 text-lg">
+          Interactive platform to explore Data Structures and Algorithms through visual representations
+        </p>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {projectLinks.map((project, index) => (
+            <motion.a
+              key={project.href}
+              href={project.href}
+              className="block bg-white border border-neutral-200 rounded-2xl p-6 text-center hover:shadow-xl transition-all duration-300 group"
+              variants={cardVariants}
+              whileHover="hover"
+              initial="hidden"
+              animate="visible"
+            >
+              <project.icon className="mx-auto mb-4 w-12 h-12 text-indigo-600 group-hover:text-purple-600 transition-colors" />
+              <h3 className="text-xl font-bold mb-2 text-neutral-800 group-hover:text-indigo-700 transition-colors">
+                {project.title}
+              </h3>
+              <p className="text-neutral-500 text-sm">
+                {project.description}
+              </p>
+            </motion.a>
+          ))}
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
